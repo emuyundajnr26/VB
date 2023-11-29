@@ -1,0 +1,89 @@
+using System;
+
+public class MainClass
+{
+    public static void Main(String[] args)
+    {
+        // main could either be an if-else structure or a switch-case structure
+
+        string choice;
+        double temperature;
+        double result;
+                
+        Console.WriteLine("Enter F to convert to Fahrenheit or C to convert to Celsius:");
+        choice = Console.ReadLine();
+
+        // if-else approach
+        if (choice == "C" || choice == "c")
+        {
+            temperature = GetTemperature("Fahrenheit");
+            result = CalculateCelsius(temperature);
+            DisplayResult(temperature, "Fahrenheit", result, "Celsius");
+        }
+        else if (choice == "F" || choice == "f")
+        {
+            temperature = GetTemperature("Celsius");
+            result = CalculateFahrenheit(temperature);
+            DisplayResult(temperature, "Celsius", result, "Fahrenheit");
+        }
+        else
+        {
+            Console.WriteLine("You must enter C to convert to Celsius or F to convert to Fahrenheit!");
+        }
+
+        // switch-case approach
+        switch(choice)
+        {
+            case "C":
+            case "c":
+                temperature = GetTemperature("Fahrenheit");
+                result = CalculateCelsius(temperature);
+                DisplayResult(temperature, "Fahrenheit", result, "Celsius");
+                break;
+            case "F":
+            case "f":
+                temperature = GetTemperature("Celsius");
+                result = CalculateFahrenheit(temperature);
+                DisplayResult(temperature, "Celsius", result, "Fahrenheit");
+                break;
+            default:
+                Console.WriteLine("You must enter C to convert to Celsius or F to convert to Fahrenheit!");
+                break;
+        }
+    }
+
+    private static double GetTemperature(string label)
+    {
+        string input;
+        double temperature;
+        
+        Console.WriteLine("Enter " + label + " temperature:");
+        input = Console.ReadLine();
+        temperature = Convert.ToDouble(input);
+
+        return temperature;
+    }
+
+    private static double CalculateCelsius(double fahrenheit)
+    {
+        double celsius;
+        
+        celsius = (fahrenheit - 32) * 5 / 9;
+        
+        return celsius;
+    }
+
+    private static double CalculateFahrenheit(double celsius)
+    {
+        double fahrenheit;
+        
+        fahrenheit = celsius * 9 / 5 + 32;
+        
+        return fahrenheit;
+    }
+
+    private static void DisplayResult(double fahrenheit, string fromLabel, double celsius, string toLabel)
+    {
+        Console.WriteLine(fahrenheit.ToString() + "° " + fromLabel + " is " + celsius.ToString() + "° " + toLabel);
+    }
+}
